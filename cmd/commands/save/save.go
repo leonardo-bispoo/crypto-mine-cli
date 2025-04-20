@@ -5,24 +5,24 @@ import (
 	"log"
 )
 
-func Save(fileType string) error {
+func Save(fileType, fileName string) error {
 	if fileType != "json" && fileType != "csv" {
 		return errors.New("file type not supported, try json or csv")
 	}
 
 	if fileType == "json" {
-		if err := saveInJSON(); err != nil {
+		if err := saveInJSON(fileName); err != nil {
 			return err
 		}
 	}
 
 	if fileType == "csv" {
-		if err := saveInCSV(); err != nil {
+		if err := saveInCSV(fileName); err != nil {
 			return err
 		}
 	}
 
-	log.Printf("File persisted in the Downloads folder in %s format", fileType)
+	log.Printf("File %s persisted in the Downloads folder in %s format", fileName, fileType)
 
 	return nil
 }

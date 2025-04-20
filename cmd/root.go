@@ -21,6 +21,14 @@ func init() {
 		"Determine the type of file that will be created to persist the cryptocurrency data, a CSV or JSON file.",
 	)
 
+	saveCmd.Flags().StringVarP(
+		&fileName,
+		"name",
+		"n",
+		"criptomine",
+		"Define the name of the file containing the cryptocurrency data",
+	)
+
 	rootCmd.AddCommand(saveCmd)
 }
 

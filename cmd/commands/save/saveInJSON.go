@@ -20,8 +20,8 @@ type Data struct {
 	Change7d  string `json:"change7d"`
 }
 
-func saveInJSON() error {
-	file, err := createJSONFile()
+func saveInJSON(fileName string) error {
+	file, err := createJSONFile(fileName)
 	if err != nil {
 		return err
 	}

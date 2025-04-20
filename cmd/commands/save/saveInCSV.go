@@ -2,22 +2,24 @@ package save
 
 import (
 	"fmt"
+	"log"
 
 	"crypto-mine-cli/cmd/commands"
 
 	"github.com/gocolly/colly"
 )
 
-func saveInCSV() error {
-	file, writer, err := createCSVFile()
+func saveInCSV(fileName string) error {
+	file, writer, err := createCSVFile(fileName)
 	if err != nil {
 		return err
 	}
 
 	defer file.Close()
+
 	defer writer.Flush()
 
-	writer.Write(
+	if err := writer.Write(
 		[]string{
 			"Name",
 			"Symbol",
@@ -28,14 +30,16 @@ func saveInCSV() error {
 			"Change (24h)",
 			"Change (7d)",
 		},
-	)
+	); err != nil {
+		return fmt.Errorf("error in writer csv header: %v", err)
+	}
 
 	c := colly.NewCollector()
 
 	c.OnHTML("tbody tr", func(h *colly.HTMLElement) {
 		metrics := commands.GetMetrics(h)
 
-		writer.Write([]string{
+		if err := writer.Write([]string{
 			metrics.Name,
 			metrics.Symbol,
 			metrics.MarketCap,
@@ -44,7 +48,9 @@ func saveInCSV() error {
 			metrics.Change1h,
 			metrics.Change24h,
 			metrics.Change7d,
-		})
+		}); err != nil {
+			log.Printf("failure to write crypto %s line: %v", metrics.Name, err)
+		}
 	})
 
 	c.OnError(func(_ *colly.Response, requestErr error) {

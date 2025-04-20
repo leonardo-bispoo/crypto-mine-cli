@@ -28,7 +28,7 @@ data of various cryptocurrencies from the Coin Market Cap
 		Short: "Save stores the results in Donwloads folder",
 		Long:  "Save stores the results in Downloads folder, The information from the table is applied to the file of your choice, choose between JSON or CSV with the --type flag (or -t for short)",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := save.Save(fileType); err != nil {
+			if err := save.Save(fileType, fileName); err != nil {
 				return err
 			}
 
