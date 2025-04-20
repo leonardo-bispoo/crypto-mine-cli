@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"crypto-mine-cli/cmd/commands/compare"
 	"crypto-mine-cli/cmd/commands/save"
 	"crypto-mine-cli/cmd/commands/scrape"
 
@@ -34,15 +33,6 @@ data of various cryptocurrencies from the Coin Market Cap
 			}
 
 			return nil
-		},
-	}
-
-	compareCmd = &cobra.Command{
-		Use:   "compare",
-		Short: "Short description",
-		Long:  "Long description",
-		Run: func(cmd *cobra.Command, args []string) {
-			compare.Compare(cryptos, metrics)
 		},
 	}
 )

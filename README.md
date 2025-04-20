@@ -16,12 +16,17 @@ In root folder execute:
 
 ```go
 go mod tidy
-go mod vendor
 ```
 
 #### Execute the project
 
 In root folder execute:
+
+```go
+go run .
+```
+
+or
 
 ```go
 go run main.go
@@ -31,16 +36,28 @@ The following message should appear in the terminal:
 
 ![run output](/docs/images/run-without-save.png)
 
-By adding the ```--save``` you can save the results in a CSV file in your system's Downloads folder (You can also use ```-s```)
+#### Using the save command
+
+Using the ```save``` you can save the results in a CSV file in your system's Downloads folder
 
 ```go
-go run main.go --save
+go run main.go save
 ```
+
+By default the format of the saved file is CSV but you can specify which type of file you want to be saved, CSV or JSON by adding the “--type” or “-t” flag.
 
 ```go
-go run main.go -s
+go run main.go save --type=json
 ```
 
-The following message should appear in the terminal with a additional log:
+The following message should appear in the terminal with a log:
 
-![run output with save](/docs/images/run-with-save.png)
+![run output with save](/docs/images/run-save-json.png)
+
+or
+
+```go
+go run main.go save --type=csv
+```
+
+![run output with save](/docs/images/run-save-csv.png)

@@ -6,7 +6,7 @@ import (
 
 func init() {
 	rootCmd.Flags().StringArrayVarP(
-		&symbolFilter,
+		&filter,
 		"filter",
 		"f",
 		[]string{},
